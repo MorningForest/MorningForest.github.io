@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "Hello Myblog"
-subtitle:   "Hello World, Hello Blog"
-date:       2019-11-14 12:00:00
+title:      "搭建word2Vec模型"
+subtitle:   "维基百科搭建自己的word2Vec模型"
+date:       2019-11-14 22:30:00
 author:     "hjw"
 header-img: "img/word2Vec-bg.jpg"
 tags:
@@ -33,7 +33,6 @@ tags:
 
 2.提取文章
 -----
-
   + 下载完WikiExtractor后,解压，使用WikiExtractor.py脚本，通过一下命令来提取文章
   `python WikiExtractor.py -b 500M -o zhwiki zhwiki-20180720-pages-articles.xml.bz2`
   + **参数介绍**  
@@ -50,7 +49,6 @@ tags:
 
 4.正则表达式提取文章内容
 -----
-
   由于提取的文章包含许多`<doc></doc>`,故需要使用正则表达式进行过滤。
 
 5.分词并合并文件
@@ -59,9 +57,8 @@ tags:
 
 6.Word2Vec模型训练
 -----
-
   调用gensim的word2Vec模型，对已经分词好文件训练。时间大概为1个小时左右,具体训练情况与电脑配置有关
-
+  
 7.word2Vec模型使用
 -----
   调用训练好模型,测试结果。

@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "搭建word2Vec模型"
-subtitle:   "维基百科搭建自己的word2Vec模型"
+subtitle:   "word2Vec模型"
 date:       2019-11-14 22:30:00
 author:     "hjw"
 header-img: "img/word2Vec-bg.jpg"
@@ -50,17 +50,69 @@ tags:
 4.正则表达式提取文章内容
 -----
   由于提取的文章包含许多`<doc></doc>`,故需要使用正则表达式进行过滤。
+  ```
+  file = open(read_filePath, "r", encoding="utf-8")
+  ouputfile = open(save_filePath, "a+", encoding="utf-8")
+  regex_str = "[^<doc.*>$]|[^</doc>$]"
+  readLine = file.readline()
+  while readLine:
+      content = re.match(regex_str, readLine)
+      if content:
+          ouputfile.write(readLine)
+      readLine = file.readline()
+  ```
 
 5.分词并合并文件
 -----
   使用jieba分词工具, hanlp工具对文件进行分词处理并合并文件。
+  + 加载去停止词
+  ```
+    stopWordList = set()
+    for filepath in filepaths:
+    with open(filepath,"r",encoding="utf-8") as f:
+        for item in f:
+            stopWordList.add(item.strip("\n"))
+  ```
+  + 使用jieba分词切词并保存
 
+  ```
+    file = open(filepath, "r", encoding="utf-8")
+    output = open(savepath, "a+", encoding="utf-8")
+    datas = file.readlines()
+    content_line = ""
+    for data in datas:
+        items = jieba.cut(data.strip("\n"), cut_all=False)
+        for item in items:
+            if item not in stopWordList:
+                content_line += item + " "
+        output.write(content_line+"\n")
+        content_line = ""
+    file.close()
+    output.close()
+  ```
 6.Word2Vec模型训练
 -----
   调用gensim的word2Vec模型，对已经分词好文件训练。时间大概为1个小时左右,具体训练情况与电脑配置有关
-  
+  ```
+    sentences = word2vec.LineSentence(filePath)
+    model = word2vec.Word2Vec(sentences,size=250)
+    model.save(savePath)
+  ```
 7.word2Vec模型使用
 -----
   调用训练好模型,测试结果。
-
+  ```
+    model = models.Word2Vec.load("wordTovec\model\wiki.model")
+    word1 = u'农业'
+    word2 = u'嘉伟'
+    if word1 in model:
+        print (u"'%s'的词向量为： " % word1)
+        print (model[word1])
+    else:
+        print (u'单词不在字典中！')
+    result = model.most_similar(word2)
+    print (u"\n与'%s'最相似的词为： " % word2)
+    for e in result:
+        print ('%s: %f' % (e[0], e[1]))
+  ```
 [代码传送门](https://github.com/MorningForest/word2vec)

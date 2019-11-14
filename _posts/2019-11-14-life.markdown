@@ -9,5 +9,17 @@ tags:
     - Life
 ---
 
-hjw
----
+NightForest的博客就这么开始啦！
+
+学计算机快3年了，终于有个地方可以写博客了。
+
+其实之前就很想自己开发个博客，但是止于自己的懒，无不想用大众博客来写。所以就一直拖着，直到现在。
+终于下定决心快速开发一个博客网站。
+
+#### 正文
+这个博客的开发参考是参考了[纯洁的微笑](http://www.ityouknow.com/other/2018/09/16/create-blog.html)和[Huxpro](https://github.com/Huxpro/huxpro.github.io)博主的技术文章，很感激他们的分享。
+
+这个博客采用的是[Github Pages](https://pages.github.com)+[jekyll](https://jekyllrb.com/) 快速搭建网站的方式。而我搭建的方法跟上面提到的两位博主所说的一样，有兴趣可以自己跟着搭建自己的网站。
+
+
+
